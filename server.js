@@ -5,10 +5,13 @@ const app = express();
 const port = process.env.port || 5000;
 
 app.get('/', (req, res) => {
+  const clientIP = req.ip;
+  const hostname = os.hostname();
+
   const serverInfo = {
     server: {
-      ip: req.connection.remoteAddress,
-      hostname: os.hostname(),
+      ip: clientIP,
+      hostname: os.hostname,
     },
     memory: {
       used: ((os.totalmem() - os.freemem()) / 1024 / 1024 / 1024).toFixed(2),
